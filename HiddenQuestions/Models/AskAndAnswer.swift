@@ -7,6 +7,8 @@
 
 import Foundation
 
+var isAdmin = false
+
 var currentView = "MainPageView"
 
 func Ask() {

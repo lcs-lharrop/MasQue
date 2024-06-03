@@ -14,6 +14,7 @@
 		3B2199812BA4CE1D000D12D1 /* AskAndAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2199802BA4CE1D000D12D1 /* AskAndAnswer.swift */; };
 		3B2199832BA4D27B000D12D1 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2199822BA4D27B000D12D1 /* Test.swift */; };
 		3B2199852BA4D7A4000D12D1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2199842BA4D7A4000D12D1 /* TestView.swift */; };
+		3B2199872BA7661C000D12D1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2199862BA7661C000D12D1 /* SettingsView.swift */; };
 		3BD70F542BA0DC5800B9BA25 /* HiddenQuestionsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD70F532BA0DC5800B9BA25 /* HiddenQuestionsApp.swift */; };
 		3BD70F562BA0DC5800B9BA25 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD70F552BA0DC5800B9BA25 /* MainPageView.swift */; };
 		3BD70F582BA0DC5B00B9BA25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BD70F572BA0DC5B00B9BA25 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 		3B2199802BA4CE1D000D12D1 /* AskAndAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAndAnswer.swift; sourceTree = "<group>"; };
 		3B2199822BA4D27B000D12D1 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		3B2199842BA4D7A4000D12D1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		3B2199862BA7661C000D12D1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3BD70F502BA0DC5800B9BA25 /* HiddenQuestions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiddenQuestions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BD70F532BA0DC5800B9BA25 /* HiddenQuestionsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenQuestionsApp.swift; sourceTree = "<group>"; };
 		3BD70F552BA0DC5800B9BA25 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				3B21997C2BA21175000D12D1 /* AskView.swift */,
+				3B2199862BA7661C000D12D1 /* SettingsView.swift */,
 			);
 			path = Overlays;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				3B2199782BA0E44E000D12D1 /* QuestionView.swift in Sources */,
 				3B21997A2BA0EBBC000D12D1 /* AnswerView.swift in Sources */,
 				3B21997F2BA3F72A000D12D1 /* StoragePrim.swift in Sources */,
+				3B2199872BA7661C000D12D1 /* SettingsView.swift in Sources */,
 				3B2199832BA4D27B000D12D1 /* Test.swift in Sources */,
 				3B2199852BA4D7A4000D12D1 /* TestView.swift in Sources */,
 				3BD70F542BA0DC5800B9BA25 /* HiddenQuestionsApp.swift in Sources */,

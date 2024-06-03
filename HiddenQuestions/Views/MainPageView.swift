@@ -13,7 +13,6 @@ struct MainPageView: View {
     
     var body: some View {
         ZStack {
-            Text("\(refresh)")
             Color.darkGray
                 .ignoresSafeArea()
             if (currentView == "AskView") {
@@ -35,29 +34,18 @@ struct MainPageView: View {
                             
                         }
                     }
-                    .padding(
-                        EdgeInsets(
-                            top: 16,
-                            leading: 16,
-                            bottom: 0,
-                            trailing: 16
-                        )
-                    )
-                    
                     HStack {
                         Text("MasQue")
                         Spacer()
-                        Button { 
+                        Button {
                             Ask()
-                            
-                            refresh += 1
                         } label: {
                             Image(systemName: "plus")
-                                .bold()
                                 .foregroundColor(.black)
                         }
                     }
                     .font(.title)
+                    .bold()
                     .padding(
                         EdgeInsets(
                             top: 16,
@@ -67,6 +55,14 @@ struct MainPageView: View {
                         )
                     )
                 }
+                .padding(
+                    EdgeInsets(
+                        top: 16,
+                        leading: 16,
+                        bottom: 0,
+                        trailing: 16
+                    )
+                )
             }
             
         }

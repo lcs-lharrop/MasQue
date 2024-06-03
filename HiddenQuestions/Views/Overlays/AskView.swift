@@ -10,7 +10,7 @@ import SwiftUI
 struct AskView: View {
     
     @State var refresh = 0
-    @State var placeholder1: String = ""
+    @State var content: String = ""
     
     var body: some View {
         ZStack {
@@ -18,46 +18,67 @@ struct AskView: View {
             Color.darkGray
                 .ignoresSafeArea()
             VStack {
-                Spacer()
-                Text("MasQue")
-                    .padding()
-            }
-            .ignoresSafeArea()
-            ZStack {
-                Color.gray
-                    .cornerRadius(20)
-                VStack {
-                    Text("Ask A Question")
-                        .padding(32)
-                        .font(.title)
-                    ZStack() {
-                        TextField("", text: $placeholder1)
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.gray)
-                            .frame(height: 100)
-                            .background(Color.darkGray)
-                            .cornerRadius(10)
-                            .padding()
-                        if placeholder1.isEmpty {
-                            Text("hi").italic()
-                                .foregroundColor(.white)
-                                .opacity(0.4)
+                ZStack {
+                    Color.gray
+                        .cornerRadius(20)
+                    VStack {
+                        Text("Ask A Question")
+                            .padding(32)
+                            .font(.title)
+                            .bold()
+                        ZStack() {
+                            TextField("", text: $content,axis: .vertical)
+                                .lineLimit(5...20)
+                                .foregroundColor(.gray)
+                                .background(Color.darkGray)
+                                .cornerRadius(10)
+                                .padding()
+                            
+                            
+                            
+                            
                         }
-                        
-                        
-                        
+                        Button {
+                            pl()
+                            refresh += 1
+                        } label: {
+                            ZStack {
+                                Text("Submit")
+                                    .bold()
+                                    .padding(8)
+                                    .foregroundColor(.black)
+                            }
+                            .background(
+                                Color.darkGray
+                                    .cornerRadius(10)
+                            )
+                        }
+                        Spacer()
                     }
-                    Button {
-                        pl()
-                        refresh += 1
-                    } label: {
-                        Text("hiiii")
-                    }
-                    Spacer()
                 }
+                HStack {
+                    Text("MasQue")
+                }
+                .font(.title)
+                .bold()
+                .padding(
+                    EdgeInsets(
+                        top: 16,
+                        leading: 16,
+                        bottom: 0,
+                        trailing: 16
+                    )
+                )
+                
             }
-                .padding()
-            
+            .padding(
+                EdgeInsets(
+                    top: 16,
+                    leading: 16,
+                    bottom: 0,
+                    trailing: 16
+                )
+            )
         }
     }
 }

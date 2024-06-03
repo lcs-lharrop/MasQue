@@ -23,4 +23,12 @@ struct Answer: Identifiable {
     let content: String
 }
 
+func removePFP() {
+    
+}
+
+func addPFP() {
+    
+}
+
 var test = Question(question: "How do I do this thingy?", comments: [Answer(name: "Lexi", profiled: true, profile: "pfp", shadowCount: 0, isShadowed: false, content: "Maybe you could try fixing it like this :D"),Answer(name: "Anonymous", profiled: false, profile: "pfp", shadowCount: 0, isShadowed: false, content: "Maybe you could try fixing it like this :D")])
