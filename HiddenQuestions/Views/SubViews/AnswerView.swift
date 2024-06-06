@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AnswerView: View {
+    
     @State var answer: Answer
 
-    
     var body: some View {
         if (answer.isShadowed != true) {
             ZStack {
@@ -98,5 +98,5 @@ struct AnswerView: View {
 }
 
 #Preview {
-    PagingManager()
+    AnswerView(answer: Answer(name: "Lexi", profiled: true, profile: "pfp", shadowCount: 0, isShadowed: false, content: "Maybe you could try fixing it like this :D"))
 }

@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct AskView: View {
+struct RespondView: View {
     
-    @Binding var showingAskSheet: Bool
+    @Binding var showingAnswerSheet: Bool
     
     @State var content: String = ""
+    
+    @State var question: String
     
     var body: some View {
         ZStack {
@@ -22,10 +24,12 @@ struct AskView: View {
                     Color.gray
                         .cornerRadius(20)
                     VStack {
-                        Text("Ask A Question")
-                            .padding(32)
+                        Text("Responding to")
+                            .padding(EdgeInsets(top: 32, leading: 32, bottom: 8, trailing: 32))
                             .font(.title)
                             .bold()
+                        Text(question)
+                            .padding(.bottom)
                         ZStack() {
                             TextField("", text: $content,axis: .vertical)
                                 .lineLimit(5...20)
@@ -39,7 +43,7 @@ struct AskView: View {
                             
                         }
                         Button {
-                            showingAskSheet = false
+                            showingAnswerSheet = false
                         } label: {
                             ZStack {
                                 Text("Submit")
@@ -83,5 +87,5 @@ struct AskView: View {
 }
 
 #Preview {
-    AskView(showingAskSheet: Binding.constant(true))
+    RespondView(showingAnswerSheet: Binding.constant(true), question: "How do this?")
 }

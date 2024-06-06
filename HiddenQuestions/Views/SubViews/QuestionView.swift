@@ -10,6 +10,11 @@ import SwiftUI
 struct QuestionView: View {
     
     var question: Question
+    
+    @Binding var showingAnswerSheet: Bool
+    
+//    var answeringQuestion = question.id
+    
     var body: some View {
         ZStack {
             Color.gray
@@ -23,7 +28,8 @@ struct QuestionView: View {
                 
                 
                 Button {
-                    respond(quesid: question.id)
+                    showingAnswerSheet = true
+//                    answeringQuestion = question.id
                 } label: {
                     ZStack {
                         Color.darkGray
@@ -53,5 +59,5 @@ struct QuestionView: View {
 
 
 #Preview {
-    QuestionView(question: test)
+    QuestionView(question: test, showingAnswerSheet: Binding.constant(true))
 }

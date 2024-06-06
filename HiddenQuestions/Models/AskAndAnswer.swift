@@ -11,10 +11,6 @@ var isAdmin = false
 
 var currentView = "MainPageView"
 
-func Ask() {
-    currentView = "AskView"
-}
-
 func respond(quesid: UUID) {
     
 }
