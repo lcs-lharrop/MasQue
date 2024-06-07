@@ -24,9 +24,9 @@ struct MainPageView: View {
             VStack {
                 ScrollView(.horizontal) {
                     LazyHStack {
-                        QuestionView(question: test, showingAnswerSheet: $showingAnswerSheet)
-                            .frame(width: 320)
-                            .padding(20)
+//                        QuestionView(question: test, showingAnswerSheet: $showingAnswerSheet)
+//                            .frame(width: 320)
+//                            .padding(20)
                         
                     }
                     

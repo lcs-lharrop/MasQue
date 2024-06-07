@@ -42,14 +42,14 @@ struct QuestionView: View {
                     }
                 }
                 
-                ScrollView(.vertical) {
-                    LazyVStack {
-                        ForEach(question.comments) { answer in
-                            AnswerView(answer: answer)
-                            
-                        }
-                    }
-                }
+//                ScrollView(.vertical) {
+//                    LazyVStack {
+//                        ForEach(question.comments) { answer in
+//                            AnswerView(answer: answer)
+//                            
+//                        }
+//                    }
+//                }
             }
         }
     }
@@ -57,6 +57,6 @@ struct QuestionView: View {
 
 
 
-#Preview {
-    QuestionView(question: test, showingAnswerSheet: Binding.constant(true))
-}
+//#Preview {
+//    QuestionView(question: test, showingAnswerSheet: Binding.constant(true))
+//}

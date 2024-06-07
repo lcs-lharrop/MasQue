@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct TestView: View {
+    
+    @State var viewModel = QuestionViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(viewModel.questions) {question in
+            
+            Text(question.question)
+            
+        }
     }
 }
 

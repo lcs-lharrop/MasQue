@@ -12,7 +12,7 @@ struct AnswerView: View {
     @State var answer: Answer
 
     var body: some View {
-        if (answer.isShadowed != true) {
+//        if (answer.isShadowed != true) {
             ZStack {
                 Color.darkGray
                     .cornerRadius(10)
@@ -22,21 +22,6 @@ struct AnswerView: View {
                             ZStack {
                                 
                                 HStack {
-                                    if (answer.profiled == true) {
-                                        Image(answer.profile ?? "NoPFPPlaceholder")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(height: 50)
-                                            .cornerRadius(50)
-                                            .padding(
-                                                EdgeInsets(
-                                                    top: 16,
-                                                    leading: 16,
-                                                    bottom: 0,
-                                                    trailing: 0
-                                                )
-                                            )
-                                    } else {
                                         Color.clear
                                             .frame(height: 50)
                                             .cornerRadius(50)
@@ -84,7 +69,7 @@ struct AnswerView: View {
                             )
                         )
                 }
-            }
+            
             .padding(
                 EdgeInsets(
                     top: 16,
@@ -95,8 +80,9 @@ struct AnswerView: View {
             )
         }
     }
-}
+//}
 
-#Preview {
-    AnswerView(answer: Answer(name: "Lexi", profiled: true, profile: "pfp", shadowCount: 0, isShadowed: false, content: "Maybe you could try fixing it like this :D"))
-}
+
+//#Preview {
+//    AnswerView(answer: Answer(name: "Lexi", content: "Maybe you could try fixing it like this :D"))
+//}

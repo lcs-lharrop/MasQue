@@ -37,7 +37,7 @@ struct SettingsView: View {
                                     .padding(.leading,40)
                                 Spacer()
                                 Button {
-                                    removePFP()
+//                                    removePFP()
                                 } label: {
                                     ZStack {
                                         Text("Remove Icon")
@@ -51,9 +51,9 @@ struct SettingsView: View {
                                 }
                                 
                                 .padding(.trailing)
-                            } else {
+//                            } else {
                                 Button {
-                                    addPFP()
+//                                    addPFP()
                                 } label: {
                                     ZStack {
                                         Text("Add Icon")
