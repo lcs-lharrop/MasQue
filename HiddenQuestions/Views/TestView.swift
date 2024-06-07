@@ -2,38 +2,17 @@
 //  TestView.swift
 //  HiddenQuestions
 //
-//  Created by Lexi on 2024-03-15.
+//  Created by Lexi on 2024-06-07.
 //
 
 import SwiftUI
 
-//struct PagingManager: View {
-//    
-//    @State var currentView: String = "Main"
-//    
-//    var body: some View {
-//        if currentView == "Ask" {
-//            return AnyView(AskView())
-//        } else {
-//            return AnyView(MainPageView())
-//        }
-//    }
-//}
+struct TestView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
 
-
-//struct TestView: View {
-//    
-//    @Binding var currentView: String
-//    
-//    var body: some View {
-//        Button {
-//            currentView = "Ask"
-//        } label: { Text("hi")
-//        }
-//            
-//    }
-//}
-//
-//#Preview {
-//    PagingManager()
-//}
+#Preview {
+    TestView()
+}

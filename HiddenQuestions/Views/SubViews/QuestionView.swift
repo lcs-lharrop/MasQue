@@ -13,7 +13,6 @@ struct QuestionView: View {
     
     @Binding var showingAnswerSheet: Bool
     
-//    var answeringQuestion = question.id
     
     var body: some View {
         ZStack {

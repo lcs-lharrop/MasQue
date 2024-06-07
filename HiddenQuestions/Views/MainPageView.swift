@@ -13,6 +13,8 @@ struct MainPageView: View {
     
     @State var showingAnswerSheet = false
     
+    
+    
     var body: some View {
         ZStack {
             Color.darkGray
