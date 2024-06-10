@@ -13,7 +13,7 @@ struct TestView: View {
     
     var body: some View {
         NavigationStack {
-            List(viewModel.questions) { question in
+            List(viewModel.questionsWithAnswers) { question in
                 
                 Text(question.question)
                 

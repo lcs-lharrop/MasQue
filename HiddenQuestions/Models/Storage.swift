@@ -22,20 +22,25 @@ struct Question: Identifiable, Codable {
     
 }
 
-struct QuestionAnswers: Identifiable, Codable {
+struct QuestionsAnswers: Identifiable, Codable {
     
     let id: Int?
     let question: String
-    var date: String
+//    var date: String
     var answers: [Answer]
     
     struct Answer: Identifiable, Codable {
         let id: Int?
-        let name: String
-        var dislikes: Int
+//        let name: String
+//        var dislikes: Int
         let content: String
-        let questionid: Int
-        let date: String
+//        let date: String
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case question
+        case answers = "answer"
     }
 
 }

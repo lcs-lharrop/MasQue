@@ -13,11 +13,32 @@ import Storage
 class QuestionsViewModel: Observable {
     
     var questions: [Question] = []
+    var questionsWithAnswers: [QuestionsAnswers] = []
     
     init() {
         Task {
             try await getQuestions()
         }
+        Task {
+            try await getQuestionWithAnswers()
+        }
+    }
+    
+    func getQuestionWithAnswers() async throws {
+        
+        do {
+            
+            let results: [QuestionsAnswers] = try await supabase
+                .from("question")
+                .select("id, question, answer(id, content)")
+                .execute()
+                .value
+            self.questionsWithAnswers = results
+            
+        } catch {
+            debugPrint(error)
+        }
+        
     }
     
     func getQuestions() async throws {
