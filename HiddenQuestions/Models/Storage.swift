@@ -15,16 +15,28 @@ let supabase = SupabaseClient(
 )
 
 struct Question: Identifiable, Codable {
+    
     let id: Int?
     let question: String
     var date: String
+    
 }
 
-struct Answer: Identifiable, Codable {
+struct QuestionAnswers: Identifiable, Codable {
+    
     let id: Int?
-    let name: String
-    var dislikes: Int
-    let content: String
-    let questionid: Int
-    let date: String
+    let question: String
+    var date: String
+    var answers: [Answer]
+    
+    struct Answer: Identifiable, Codable {
+        let id: Int?
+        let name: String
+        var dislikes: Int
+        let content: String
+        let questionid: Int
+        let date: String
+    }
+
 }
+

@@ -9,15 +9,20 @@ import SwiftUI
 
 struct TestView: View {
     
-    @State var viewModel = QuestionViewModel()
+    @State private var viewModel = QuestionsViewModel()
     
     var body: some View {
-        List(viewModel.questions) {question in
-            
-            Text(question.question)
-            
+        NavigationStack {
+            List(viewModel.questions) { question in
+                
+                Text(question.question)
+                
+            }
+            .navigationTitle("Questions")
         }
+        
     }
+    
 }
 
 #Preview {
