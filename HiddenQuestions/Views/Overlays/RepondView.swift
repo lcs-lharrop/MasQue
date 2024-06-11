@@ -11,9 +11,15 @@ struct RespondView: View {
     
     @Binding var showingAnswerSheet: Bool
     
+    
+    
     @State var content: String = ""
     
-    @State var question: String
+    @State var question: QuestionsAnswers
+    
+    
+    @Environment(QuestionsViewModel.self) var viewModel
+    
     
     var body: some View {
         ZStack {
@@ -28,7 +34,7 @@ struct RespondView: View {
                             .padding(EdgeInsets(top: 32, leading: 32, bottom: 8, trailing: 32))
                             .font(.title)
                             .bold()
-                        Text(question)
+                        Text(question.question)
                             .padding(.bottom)
                         ZStack() {
                             TextField("", text: $content,axis: .vertical)
@@ -44,6 +50,7 @@ struct RespondView: View {
                         }
                         Button {
                             showingAnswerSheet = false
+                            viewModel.createAnswer(content: content, in: question)
                         } label: {
                             ZStack {
                                 Text("Submit")
@@ -59,33 +66,34 @@ struct RespondView: View {
                         Spacer()
                     }
                 }
-                HStack {
-                    Text("MasQue")
-                }
-                .font(.title)
-                .bold()
-                .padding(
-                    EdgeInsets(
-                        top: 16,
-                        leading: 16,
-                        bottom: 0,
-                        trailing: 16
+                Text("MasQue")
+                    .font(.title)
+                    
+                    .bold()
+                    .padding(
+                        EdgeInsets(
+                            top: 16,
+                            leading: 16,
+                            bottom: 0,
+                            trailing: 16
+                        )
                     )
-                )
+                    
                 
             }
             .padding(
                 EdgeInsets(
-                    top: 16,
-                    leading: 16,
-                    bottom: 0,
-                    trailing: 16
+                    top: 32,
+                    leading: 32,
+                    bottom: 16,
+                    trailing: 32
                 )
             )
+            .ignoresSafeArea()
         }
     }
 }
 
-#Preview {
-    RespondView(showingAnswerSheet: Binding.constant(true), question: "How do this?")
-}
+//#Preview {
+//    RespondView(showingAnswerSheet: Binding.constant(true), question: Binding.constant(QuestionsAnswers(id: -1, question: "AAAAAA", updated: "0", answers: [])))
+//}

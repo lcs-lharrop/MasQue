@@ -9,12 +9,15 @@ import SwiftUI
 
 struct QuestionView: View {
     
-    var question: QuestionsAnswers
+    let question: QuestionsAnswers
     
     @Binding var showingAnswerSheet: Bool
     
+    @Binding var answeringQuestion: QuestionsAnswers
     
     var body: some View {
+    
+        
         ZStack {
             Color.gray
                 .cornerRadius(20)
@@ -27,7 +30,10 @@ struct QuestionView: View {
                 
                 
                 Button {
+                    
+                    
                     showingAnswerSheet = true
+                    
 //                    answeringQuestion = question.id
                 } label: {
                     ZStack {
@@ -52,6 +58,16 @@ struct QuestionView: View {
                 }
                 .padding()
             }
+        }
+        .sheet(isPresented: $showingAnswerSheet) {
+            RespondView(
+            showingAnswerSheet: $showingAnswerSheet,
+            question: question
+        )
+                .ignoresSafeArea()
+                .presentationDetents([.fraction(0.999)])
+            
+            
         }
     }
 }

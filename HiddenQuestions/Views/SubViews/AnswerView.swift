@@ -61,11 +61,11 @@ struct AnswerView: View {
 //}
 
 
-#Preview {
-    AnswerView(
-        answer: QuestionsAnswers.Answer(
-            id: 1,
-            content: "Yes, thisis how"
-        )
-    )
-}
+//#Preview {
+//    AnswerView(
+//        answer: QuestionsAnswers.Answer(
+//            id: 1,
+//            content: "Yes, thisis how"
+//        )
+//    )
+//}

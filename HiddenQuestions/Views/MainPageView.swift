@@ -13,6 +13,8 @@ struct MainPageView: View {
     
     @State var showingAnswerSheet = false
     
+    @State var answeringQuestion = QuestionsAnswers(id: -1, question: "Error, try reloading", updated: "0", answers: [])
+    
     @State private var viewModel = QuestionsViewModel()
     
     
@@ -26,9 +28,14 @@ struct MainPageView: View {
                 VStack {
                     ScrollView(.horizontal) {
                         LazyHStack {
-                            ForEach(viewModel.questionsWithAnswers) { question in
-                                QuestionView(question: question, showingAnswerSheet: $showingAnswerSheet)
-                                    .frame(width: 320)
+                            ForEach($viewModel.questionsWithAnswers) { $question in
+                                QuestionView(
+                                    question: question,
+                                    showingAnswerSheet: $showingAnswerSheet,
+                                    answeringQuestion: $question
+                                )
+                                    .environment(viewModel)
+                                    .frame(width: 321)
                                     .padding(20)
                             }
                             
@@ -73,12 +80,7 @@ struct MainPageView: View {
                     
                     
                 }
-                .sheet(isPresented: $showingAnswerSheet) { RespondView(showingAnswerSheet: $showingAnswerSheet, question:"aaaaaaa")
-                        .ignoresSafeArea()
-                        .presentationDetents([.fraction(0.999)])
-                    
-                    
-                }
+                
                 VStack {
                     Spacer()
                     HStack {
@@ -92,7 +94,7 @@ struct MainPageView: View {
                             .foregroundStyle(.white)
                             .bold()
                     }
-                    .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
+                    .padding(6)
                     Spacer()
                 }
             }
