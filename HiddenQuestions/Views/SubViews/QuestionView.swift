@@ -1,62 +1,63 @@
-////
-////  QuestionView.swift
-////  HiddenQuestions
-////
-////  Created by Lexi on 2024-03-12.
-////
 //
-//import SwiftUI
+//  QuestionView.swift
+//  HiddenQuestions
 //
-//struct QuestionView: View {
-//    
-//    var question: Question
-//    
-//    @Binding var showingAnswerSheet: Bool
-//    
-//    
-//    var body: some View {
-//        ZStack {
-//            Color.gray
-//                .cornerRadius(20)
-//            VStack {
-//                Text(question.question)
-//                    .padding(24)
-//                    .multilineTextAlignment(.center)
-//                    .bold()
-//                
-//                
-//                
-//                Button {
-//                    showingAnswerSheet = true
-////                    answeringQuestion = question.id
-//                } label: {
-//                    ZStack {
-//                        Color.darkGray
-//                            .cornerRadius(10)
-//                            .padding()
-//                            .frame(height: 100)
-//                        Image(systemName: "plus")
-//                            .foregroundColor(.black)
-//                            .font(.title)
-//                            .bold()
-//                    }
-//                }
-//                
-////                ScrollView(.vertical) {
-////                    LazyVStack {
-////                        ForEach(question.comments) { answer in
-////                            AnswerView(answer: answer)
-////                            
-////                        }
-////                    }
-////                }
-//            }
-//        }
-//    }
+//  Created by Lexi on 2024-03-12.
+//
+
+import SwiftUI
+
+struct QuestionView: View {
+    
+    var question: QuestionsAnswers
+    
+    @Binding var showingAnswerSheet: Bool
+    
+    
+    var body: some View {
+        ZStack {
+            Color.gray
+                .cornerRadius(20)
+            VStack {
+                Text(question.question)
+                    .padding(24)
+                    .multilineTextAlignment(.center)
+                    .bold()
+                
+                
+                
+                Button {
+                    showingAnswerSheet = true
+//                    answeringQuestion = question.id
+                } label: {
+                    ZStack {
+                        Color.darkGray
+                            .cornerRadius(10)
+                            .padding()
+                            .frame(height: 100)
+                        Image(systemName: "plus")
+                            .foregroundColor(.black)
+                            .font(.title)
+                            .bold()
+                    }
+                }
+                
+                ScrollView(.vertical) {
+                    LazyVStack {
+                        ForEach(question.answers) { answer in
+                            AnswerView(answer: answer)
+                            
+                        }
+                    }
+                }
+                .padding()
+            }
+        }
+    }
+}
+
+
+
+//#Preview {
+//    QuestionView(question: test, showingAnswerSheet: Binding.constant(true))
 //}
-//
-//
-//
-////#Preview {
-////    QuestionView(question: test, showingAnswerSheet: Binding.constant(true))
-////}

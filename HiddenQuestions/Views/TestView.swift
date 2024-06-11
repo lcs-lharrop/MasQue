@@ -15,7 +15,10 @@ struct TestView: View {
         NavigationStack {
             List(viewModel.questionsWithAnswers) { question in
                 
-                Text(question.question)
+                VStack {
+                    Text(question.question)
+//                    
+                }
                 
             }
             .navigationTitle("Questions")
