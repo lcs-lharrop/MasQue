@@ -21,6 +21,7 @@ struct Answer: Identifiable, Codable {
     var dislikes: Int
     let content: String
     let questionId: Int
+    let date: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,6 +29,7 @@ struct Answer: Identifiable, Codable {
         case dislikes
         case content
         case questionId = "question_id"
+        case date
     }
 //    let date: String
 }
@@ -44,7 +46,7 @@ struct QuestionsAnswers: Identifiable, Codable {
         let name: String
         var dislikes: Int
         let content: String
-//        let date: String
+        let date: String
     }
     
     enum CodingKeys: String, CodingKey {

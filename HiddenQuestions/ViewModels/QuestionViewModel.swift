@@ -30,7 +30,7 @@ class QuestionsViewModel: Observable {
             
             let results: [QuestionsAnswers] = try await supabase
                 .from("question")
-                .select("id, question, updated, answer(id, content, name, dislikes)")
+                .select("id, question, updated, answer(id, content, name, dislikes, date)")
                 .execute()
                 .value
             self.questionsWithAnswers = results
@@ -51,8 +51,8 @@ class QuestionsViewModel: Observable {
                 name: "Anonymous",
                 dislikes: 0,
                 content: content,
-                questionId: question.id
-                
+                questionId: question.id,
+                date: "0"
             )
             
             // Write it to the database
@@ -60,8 +60,8 @@ class QuestionsViewModel: Observable {
                 
                 // Insert the new to-do item, and then immediately select
                 // it back out of the database
-                let newlyInsertedItem: QuestionsAnswers = try await supabase
-                    .from("answers")
+                let newlyInsertedItem: QuestionsAnswers.Answer = try await supabase
+                    .from("answer")
                     .insert(answer)   // Insert the todo item created locally in memory
                     .select()       // Select the item just inserted
                     .single()       // Ensure just one row is returned
@@ -72,7 +72,8 @@ class QuestionsViewModel: Observable {
                 // database into the array used by the view model
                 // NOTE: We do this to obtain the id that is automatically assigned by Supabase
                 //       when the to-do item was inserted into the database table
-                self.questionsWithAnswers.append(newlyInsertedItem)
+                //self.questionsWithAnswers[question.id].answers.append(newlyInsertedItem)
+                try await self.getQuestionWithAnswers()
                 
             } catch {
                 debugPrint(error)
