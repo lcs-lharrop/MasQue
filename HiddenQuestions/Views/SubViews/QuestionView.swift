@@ -15,6 +15,7 @@ struct QuestionView: View {
     
     @Binding var answeringQuestion: QuestionsAnswers
     
+    
     var body: some View {
     
         
@@ -31,10 +32,9 @@ struct QuestionView: View {
                 
                 Button {
                     
-                    
+                    answeringQuestion = question
                     showingAnswerSheet = true
                     
-//                    answeringQuestion = question.id
                 } label: {
                     ZStack {
                         Color.darkGray
@@ -62,8 +62,11 @@ struct QuestionView: View {
         .sheet(isPresented: $showingAnswerSheet) {
             RespondView(
             showingAnswerSheet: $showingAnswerSheet,
-            question: question
+            question: answeringQuestion
         )
+            .onAppear() {
+                print(answeringQuestion)
+            }
                 .ignoresSafeArea()
                 .presentationDetents([.fraction(0.999)])
             
