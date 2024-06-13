@@ -11,45 +11,54 @@ struct AnswerView: View {
     
     @State var answer: QuestionsAnswers.Answer
     
+    @Environment(QuestionsViewModel.self) var viewModel
+    
     var body: some View {
-        //        if (answer.isShadowed != true) {
-        ZStack {
-            Color.darkGray
-                .cornerRadius(
-                    10
-                )
-            VStack {
-                HStack {
-                    ZStack {
-                        HStack {
-                            Spacer()
-                            Text("Lexi")
-                            .foregroundStyle(Color.white)
-                            .padding()
-                            .bold()
-                            Spacer()
-                        }
-                        HStack{
-                            Spacer()
-                            Image(systemName: "hand.thumbsdown.fill")
-                                .padding()
-                        }
-                    }
-                    
-                    
-                    
-                    
-                }
-                Text(answer.content)
-                .foregroundStyle(Color.white)
-                .padding(
-                    EdgeInsets(
-                        top: 0,
-                        leading: 16,
-                        bottom: 16,
-                        trailing: 16
+        if (answer.dislikes < 5) {
+            ZStack {
+                Color.darkGray
+                    .cornerRadius(
+                        10
                     )
-                )
+                VStack {
+                    HStack {
+                        ZStack {
+                            HStack {
+                                Spacer()
+                                Text(answer.name)
+                                    .foregroundStyle(Color.white)
+                                    .padding()
+                                    .bold()
+                                Spacer()
+                            }
+                            HStack{
+                                Spacer()
+                                Button(action: {
+                                    answer.dislikes += 1
+                                    viewModel.update(questionsWithAnswers: answer)
+                                }, label: {
+                                    Image(systemName: "hand.thumbsdown.fill")
+                                        .padding()
+                                })
+                            }
+                        }
+                        
+                        
+                        
+                        
+                    }
+                    Text(answer.content)
+                        .foregroundStyle(Color.white)
+                        .padding(
+                            EdgeInsets(
+                                top: 0,
+                                leading: 16,
+                                bottom: 16,
+                                trailing: 16
+                            )
+                        )
+                }
+                
             }
             
         }
@@ -57,8 +66,6 @@ struct AnswerView: View {
     }
     
 }
-
-//}
 
 
 //#Preview {

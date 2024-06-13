@@ -74,9 +74,14 @@ struct MainPageView: View {
                         trailing: 16
                     )
                 )
-                .sheet(isPresented: $showingAskSheet) { AskView(showingAskSheet: $showingAskSheet)
+                .sheet(isPresented: $showingAskSheet, onDismiss: {
+                    Task {
+                        try await viewModel.getQuestionWithAnswers()
+                    }
+                }) { AskView(showingAskSheet: $showingAskSheet)
+                        .environment(viewModel)
                         .ignoresSafeArea()
-                        .presentationDetents([.fraction(0.999)])
+                        .presentationDetents([.fraction(1)])
                     
                     
                 }

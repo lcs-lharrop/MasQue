@@ -34,6 +34,19 @@ struct Answer: Identifiable, Codable {
 //    let date: String
 }
 
+struct Question: Identifiable, Codable {
+    var id: Int?
+    let question: String
+    let updated: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case question
+        case updated
+    }
+    
+}
+
 struct QuestionsAnswers: Identifiable, Codable {
     
     var id: Int

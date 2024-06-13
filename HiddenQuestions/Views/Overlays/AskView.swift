@@ -13,6 +13,8 @@ struct AskView: View {
     
     @State var content: String = ""
     
+    @Environment(QuestionsViewModel.self) var viewModel
+    
     var body: some View {
         ZStack {
             Color.darkGray
@@ -39,6 +41,7 @@ struct AskView: View {
                             
                         }
                         Button {
+                            viewModel.createQuestion(question: content)
                             showingAskSheet = false
                         } label: {
                             ZStack {

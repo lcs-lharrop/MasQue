@@ -42,6 +42,55 @@ class QuestionsViewModel: Observable {
         
     }
     
+    func update(questionsWithAnswers updatedAnswer: QuestionsAnswers.Answer) {
+           
+           // Create a unit of asynchronous work to add the to-do item
+           Task {
+               
+               do {
+                   
+                   
+                   try await supabase
+                       .from("answer")
+                       .update(updatedAnswer)
+                       .eq("id", value: updatedAnswer.id)   // Only update the row whose id
+                       .execute()                          // matches that of the to-do being deleted
+                       
+               } catch {
+                   debugPrint(error)
+               }
+               
+           }
+           
+       }
+    
+    func createQuestion(question: String) {
+        
+        // Create a unit of asynchronous work to add the to-do item
+        Task {
+            
+            let question = Question(
+                question: question,
+                updated: "0"
+            )
+            
+            // Write it to the database
+            do {
+                
+                let _: QuestionsAnswers = try await supabase
+                    .from("question")
+                    .insert(question)
+                    .select()
+                    .single()
+                    .execute()
+                    .value
+                
+            } catch {
+                debugPrint(error)
+            }
+        }
+    }
+    
     func createAnswer(content: String, in question: QuestionsAnswers) {
         
         // Create a unit of asynchronous work to add the to-do item
@@ -58,21 +107,14 @@ class QuestionsViewModel: Observable {
             // Write it to the database
             do {
                 
-                // Insert the new to-do item, and then immediately select
-                // it back out of the database
-                let newlyInsertedItem: QuestionsAnswers.Answer = try await supabase
+                let _: QuestionsAnswers.Answer = try await supabase
                     .from("answer")
-                    .insert(answer)   // Insert the todo item created locally in memory
-                    .select()       // Select the item just inserted
-                    .single()       // Ensure just one row is returned
-                    .execute()      // Run the query
-                    .value          // Automatically decode the JSON into an instance of TodoItem
+                    .insert(answer)
+                    .select()
+                    .single()
+                    .execute()
+                    .value
                 
-                // Finally, insert the to-do item instance we just selected back from the
-                // database into the array used by the view model
-                // NOTE: We do this to obtain the id that is automatically assigned by Supabase
-                //       when the to-do item was inserted into the database table
-                //self.questionsWithAnswers[question.id].answers.append(newlyInsertedItem)
                 try await self.getQuestionWithAnswers()
                 
             } catch {

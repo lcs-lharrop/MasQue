@@ -68,7 +68,7 @@ struct QuestionView: View {
                 print(answeringQuestion)
             }
                 .ignoresSafeArea()
-                .presentationDetents([.fraction(0.999)])
+                .presentationDetents([.fraction(1)])
             
             
         }
