@@ -14,7 +14,7 @@ struct AnswerView: View {
     @Environment(QuestionsViewModel.self) var viewModel
     
     var body: some View {
-        if (answer.dislikes <= 5) {
+        if (answer.dislikes < 5) {
             ZStack {
                 Color.darkGray
                     .cornerRadius(
@@ -35,11 +35,21 @@ struct AnswerView: View {
                                 Button(action: {
                                     answer.likes += 1
                                     viewModel.updateAnswer(questionsWithAnswers: answer)
-                                }, label: {
-                                    Image(systemName: "hand.thumbsdown.fill")
-                                        .padding()
-                                        .tint(.black)
+                                },
+                                       label: {
+                                    Image(systemName: "hand.thumbsup.fill")
+                                        .padding(
+                                            EdgeInsets(
+                                                top: 0,
+                                                leading: 16,
+                                                bottom: 0,
+                                                trailing: 0
+                                            )
+                                        )
+                                        .tint(.green)
                                 })
+                                Text(String(answer.likes))
+                                    .foregroundStyle(.green)
                                 Spacer()
                                 Button(action: {
                                     answer.dislikes += 1
@@ -47,7 +57,7 @@ struct AnswerView: View {
                                 }, label: {
                                     Image(systemName: "hand.thumbsdown.fill")
                                         .padding()
-                                        .tint(.black)
+                                        .tint(.red)
                                 })
                             }
                         }

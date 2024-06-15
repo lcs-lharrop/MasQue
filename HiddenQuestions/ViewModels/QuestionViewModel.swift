@@ -15,11 +15,13 @@ class QuestionsViewModel: Observable {
     
     var questionsWithAnswers: [QuestionsAnswers] = []
     
-    var userID: String
+//    var userID: String
+    
+    var fetchingQuestions: Bool = false
     
     init() {
         
-        self.userID = UUID().uuidString
+//        self.userID = UUID().uuidString
         
         Task {
             try await getQuestionWithAnswers()
@@ -28,17 +30,20 @@ class QuestionsViewModel: Observable {
     
     func getQuestionWithAnswers() async throws {
         
+        fetchingQuestions = true
+        
         do {
             
             let results: [QuestionsAnswers] = try await supabase
                 .from("question")
-                .select("id, question, updated, answer(id, content, name, likes, date, dislikes")
+                .select("id, question, updated, answer(id, content, name, likes, date, dislikes)")
                 .order("updated", ascending: false)
 //                .order("answer.date", ascending: false)
                 .order("date", ascending: false, referencedTable: "answer")
                 .execute()
                 .value
             self.questionsWithAnswers = results
+            fetchingQuestions = false
             dump(self.questionsWithAnswers)
             
         } catch {
@@ -132,7 +137,9 @@ class QuestionsViewModel: Observable {
                 likes: 0,
                 content: content,
                 questionId: question.id,
+                dislikes: 0,
                 date: Date()
+                
             )
             
             let nquestion = Question(
