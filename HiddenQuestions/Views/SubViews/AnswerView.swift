@@ -14,7 +14,7 @@ struct AnswerView: View {
     @Environment(QuestionsViewModel.self) var viewModel
     
     var body: some View {
-        if (answer.dislikes.count < 5) {
+        if (answer.dislikes <= 5) {
             ZStack {
                 Color.darkGray
                     .cornerRadius(
@@ -42,7 +42,8 @@ struct AnswerView: View {
                                 })
                                 Spacer()
                                 Button(action: {
-                                    viewModel.dislike(questionsWithAnswers: answer)
+                                    answer.dislikes += 1
+                                    viewModel.updateAnswer(questionsWithAnswers: answer)
                                 }, label: {
                                     Image(systemName: "hand.thumbsdown.fill")
                                         .padding()

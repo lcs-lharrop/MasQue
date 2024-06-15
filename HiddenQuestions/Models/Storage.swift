@@ -8,23 +8,10 @@
 import Foundation
 import Supabase
 
-
 let supabase = SupabaseClient(
   supabaseURL: URL(string: "https://qrwzzlexiddbecndwaed.supabase.co")!,
   supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFyd3p6bGV4aWRkYmVjbmR3YWVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc3NzUyNzEsImV4cCI6MjAzMzM1MTI3MX0.bGAswE5SPrECA04gjbkOLUbLFhkqbHsZC8uGjPmY4Dg"
 )
-
-struct Dislike: Identifiable, Codable {
-    var id: Int?
-    let answerId: Int
-    let userID: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case answerId = "answer_id"
-        case userID = "user_id"
-    }
-}
 
 struct Answer: Identifiable, Codable {
     var id: Int?
@@ -32,6 +19,7 @@ struct Answer: Identifiable, Codable {
     var likes: Int
     let content: String
     let questionId: Int
+    var dislikes: Int
     let date: Date
     
     enum CodingKeys: String, CodingKey {
@@ -41,6 +29,7 @@ struct Answer: Identifiable, Codable {
         case content
         case questionId = "question_id"
         case date
+        case dislikes
     }
 //    let date: String
 }
@@ -68,29 +57,10 @@ struct QuestionsAnswers: Identifiable, Codable {
     struct Answer: Identifiable, Codable {
         var id: Int
         let name: String
-        var dislikes: [Dislike]
         let content: String
         var likes: Int
         let date: Date
-        
-        struct Dislike: Identifiable, Codable {
-            var id: Int
-            let userID: String
-            
-            enum CodingKeys: String, CodingKey {
-                case id
-                case userID = "user_id"
-            }
-        }
-        
-        enum CodingKeys: String, CodingKey {
-            case id
-            case name
-            case dislikes
-            case content
-            case likes
-            case date
-        }
+        var dislikes: Int
     }
     
     enum CodingKeys: String, CodingKey {

@@ -32,7 +32,7 @@ class QuestionsViewModel: Observable {
             
             let results: [QuestionsAnswers] = try await supabase
                 .from("question")
-                .select("id, question, updated, answer(id, content, name, likes, date, dislikes(id, user_id))")
+                .select("id, question, updated, answer(id, content, name, likes, date, dislikes")
                 .order("updated", ascending: false)
 //                .order("answer.date", ascending: false)
                 .order("date", ascending: false, referencedTable: "answer")
@@ -160,51 +160,6 @@ class QuestionsViewModel: Observable {
                 
             } catch {
                 debugPrint(error)
-            }
-        }
-    }
-    
-    func dislike(questionsWithAnswers answer: QuestionsAnswers.Answer) {
-        
-        var hasDisliked = false
-        
-        for dislike in answer.dislikes {
-            print(dislike.userID)
-            print(userID)
-            if dislike.userID == userID {
-                hasDisliked = true
-                
-            }
-        }
-        
-        
-        print(hasDisliked)
-        
-        if (!hasDisliked) {
-            print("yes")
-            Task {
-                
-                let dislike = Dislike(
-                    answerId: answer.id,
-                    userID: userID
-                )
-                
-                // Write it to the database
-                do {
-                    print("also")
-                    let _: QuestionsAnswers.Answer.Dislike = try await supabase
-                        .from("dislikes")
-                        .insert(dislike)
-                        .select()
-                        .single()
-                        .execute()
-                        .value
-                    
-                    try await self.getQuestionWithAnswers()
-                    
-                } catch {
-                    debugPrint(error)
-                }
             }
         }
     }
