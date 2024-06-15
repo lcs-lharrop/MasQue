@@ -7,18 +7,20 @@
 
 import Foundation
 import Storage
+import SwiftUI
 
 
 @Observable
 class QuestionsViewModel: Observable {
     
-//    var questions: [Question] = []
     var questionsWithAnswers: [QuestionsAnswers] = []
     
+    var userID: String
+    
     init() {
-        //        Task {
-        //            try await getQuestions()
-        //        }
+        
+        self.userID = UUID().uuidString
+        
         Task {
             try await getQuestionWithAnswers()
         }
@@ -30,7 +32,10 @@ class QuestionsViewModel: Observable {
             
             let results: [QuestionsAnswers] = try await supabase
                 .from("question")
-                .select("id, question, updated, answer(id, content, name, dislikes, date)")
+                .select("id, question, updated, answer(id, content, name, likes, date, dislikes(id, user_id))")
+                .order("updated", ascending: false)
+//                .order("answer.date", ascending: false)
+                .order("date", ascending: false, referencedTable: "answer")
                 .execute()
                 .value
             self.questionsWithAnswers = results
@@ -42,7 +47,7 @@ class QuestionsViewModel: Observable {
         
     }
     
-    func update(questionsWithAnswers updatedAnswer: QuestionsAnswers.Answer) {
+    func updateAnswer(questionsWithAnswers updatedAnswer: QuestionsAnswers.Answer) {
            
            // Create a unit of asynchronous work to add the to-do item
            Task {
@@ -64,6 +69,30 @@ class QuestionsViewModel: Observable {
            
        }
     
+    func updateQuestion(questionsWithAnswers updatedQuestion: Question) {
+           
+           // Create a unit of asynchronous work to add the to-do item
+           Task {
+               
+               do {
+                   
+                   
+                   try await supabase
+                       .from("question")
+                       .update(updatedQuestion)
+                       .eq("id", value: updatedQuestion.id)
+                       .execute()
+                   
+                   try await self.getQuestionWithAnswers()
+                       
+               } catch {
+                   debugPrint(error)
+               }
+               
+           }
+           
+       }
+    
     func createQuestion(question: String) {
         
         // Create a unit of asynchronous work to add the to-do item
@@ -71,7 +100,7 @@ class QuestionsViewModel: Observable {
             
             let question = Question(
                 question: question,
-                updated: "0"
+                updated: Date()
             )
             
             // Write it to the database
@@ -84,6 +113,8 @@ class QuestionsViewModel: Observable {
                     .single()
                     .execute()
                     .value
+                
+                try await self.getQuestionWithAnswers()
                 
             } catch {
                 debugPrint(error)
@@ -98,10 +129,16 @@ class QuestionsViewModel: Observable {
             
             let answer = Answer(
                 name: "Anonymous",
-                dislikes: 0,
+                likes: 0,
                 content: content,
                 questionId: question.id,
-                date: "0"
+                date: Date()
+            )
+            
+            let nquestion = Question(
+                id: question.id,
+                question: question.question,
+                updated: Date()
             )
             
             // Write it to the database
@@ -117,69 +154,58 @@ class QuestionsViewModel: Observable {
                 
                 try await self.getQuestionWithAnswers()
                 
+                print(nquestion)
+                
+                self.updateQuestion(questionsWithAnswers: nquestion)
+                
             } catch {
                 debugPrint(error)
             }
         }
     }
     
-    //    func getQuestions() async throws {
-    //
-    //        do {
-    //
-    //            let results: [Question] = try await supabase
-    //                .from("question")
-    //                .select()
-    //                .execute()
-    //                .value
-    //            self.questions = results
-    //
-    //        } catch {
-    //            debugPrint(error)
-    //        }
-    //
-    //    }
-    
+    func dislike(questionsWithAnswers answer: QuestionsAnswers.Answer) {
+        
+        var hasDisliked = false
+        
+        for dislike in answer.dislikes {
+            print(dislike.userID)
+            print(userID)
+            if dislike.userID == userID {
+                hasDisliked = true
+                
+            }
+        }
+        
+        
+        print(hasDisliked)
+        
+        if (!hasDisliked) {
+            print("yes")
+            Task {
+                
+                let dislike = Dislike(
+                    answerId: answer.id,
+                    userID: userID
+                )
+                
+                // Write it to the database
+                do {
+                    print("also")
+                    let _: QuestionsAnswers.Answer.Dislike = try await supabase
+                        .from("dislikes")
+                        .insert(dislike)
+                        .select()
+                        .single()
+                        .execute()
+                        .value
+                    
+                    try await self.getQuestionWithAnswers()
+                    
+                } catch {
+                    debugPrint(error)
+                }
+            }
+        }
+    }
 }
-
-
-//@Observable
-//class QuestionsViewModel {
-//
-//    var questions: [QuestionAnswer]
-//
-//
-//    var fetchingQuestions: Bool = false
-//
-//    // MARK: Initializer(s)
-//    init(questions: [Question] = []) {
-//        self.questions = questions
-//        Task {
-//            try await getQuestions()
-//        }
-//    }
-//
-//    // MARK: Functions
-//    func getQuestions() async throws {
-//
-//        fetchingQuestions = true
-//
-//        do {
-//            let results: [Question] = try await supabase
-//                .from("question")
-//                .select()
-//                .order("date",ascending: true)
-//                .execute()
-//                .value
-//
-//            self.questions = results
-//
-//            fetchingQuestions = false
-//
-//        } catch {
-//            debugPrint(error)
-//        }
-//
-//
-//    }
-//}

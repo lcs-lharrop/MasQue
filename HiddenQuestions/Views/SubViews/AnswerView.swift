@@ -14,7 +14,7 @@ struct AnswerView: View {
     @Environment(QuestionsViewModel.self) var viewModel
     
     var body: some View {
-        if (answer.dislikes < 5) {
+        if (answer.dislikes.count < 5) {
             ZStack {
                 Color.darkGray
                     .cornerRadius(
@@ -32,13 +32,21 @@ struct AnswerView: View {
                                 Spacer()
                             }
                             HStack{
-                                Spacer()
                                 Button(action: {
-                                    answer.dislikes += 1
-                                    viewModel.update(questionsWithAnswers: answer)
+                                    answer.likes += 1
+                                    viewModel.updateAnswer(questionsWithAnswers: answer)
                                 }, label: {
                                     Image(systemName: "hand.thumbsdown.fill")
                                         .padding()
+                                        .tint(.black)
+                                })
+                                Spacer()
+                                Button(action: {
+                                    viewModel.dislike(questionsWithAnswers: answer)
+                                }, label: {
+                                    Image(systemName: "hand.thumbsdown.fill")
+                                        .padding()
+                                        .tint(.black)
                                 })
                             }
                         }
@@ -68,11 +76,6 @@ struct AnswerView: View {
 }
 
 
-//#Preview {
-//    AnswerView(
-//        answer: QuestionsAnswers.Answer(
-//            id: 1,
-//            content: "Yes, thisis how"
-//        )
-//    )
-//}
+#Preview {
+    MainPageView()
+}

@@ -64,9 +64,6 @@ struct QuestionView: View {
             showingAnswerSheet: $showingAnswerSheet,
             question: answeringQuestion
         )
-            .onAppear() {
-                print(answeringQuestion)
-            }
                 .ignoresSafeArea()
                 .presentationDetents([.fraction(1)])
             

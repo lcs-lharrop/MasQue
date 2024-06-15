@@ -26,6 +26,7 @@
 		D384D47D2C13675D00E0ECDC /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = D384D47C2C13675D00E0ECDC /* Storage */; };
 		D384D47F2C13675D00E0ECDC /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = D384D47E2C13675D00E0ECDC /* Supabase */; };
 		D384D4822C13697C00E0ECDC /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384D4812C13697C00E0ECDC /* QuestionViewModel.swift */; };
+		D3FBBC4A2C1BC45B006E14A2 /* TestViewa.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FBBC492C1BC45B006E14A2 /* TestViewa.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		D318D93D2C0E62E400748C7B /* RepondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepondView.swift; sourceTree = "<group>"; };
 		D384D4712C1366B300E0ECDC /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		D384D4812C13697C00E0ECDC /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
+		D3FBBC492C1BC45B006E14A2 /* TestViewa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewa.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				3B2199822BA4D27B000D12D1 /* Test.swift */,
 				3B2199792BA0EBBC000D12D1 /* AnswerView.swift */,
 				3B2199772BA0E44E000D12D1 /* QuestionView.swift */,
+				D3FBBC492C1BC45B006E14A2 /* TestViewa.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3FBBC4A2C1BC45B006E14A2 /* TestViewa.swift in Sources */,
 				3BD70F562BA0DC5800B9BA25 /* MainPageView.swift in Sources */,
 				D384D4722C1366B300E0ECDC /* TestView.swift in Sources */,
 				D318D93E2C0E62E400748C7B /* RepondView.swift in Sources */,

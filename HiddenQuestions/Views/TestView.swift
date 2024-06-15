@@ -1,33 +1,33 @@
+////
+////  TestView.swift
+////  HiddenQuestions
+////
+////  Created by Lexi on 2024-06-07.
+////
 //
-//  TestView.swift
-//  HiddenQuestions
+//import SwiftUI
 //
-//  Created by Lexi on 2024-06-07.
+//struct TestView: View {
+//    
+//    @State private var viewModel = QuestionsViewModel()
+//    
+//    var body: some View {
+//        NavigationStack {
+//            List(viewModel.questionsWithAnswers) { question in
+//                
+//                VStack {
+//                    Text(question.question)
+////                    
+//                }
+//                
+//            }
+//            .navigationTitle("Questions")
+//        }
+//        
+//    }
+//    
+//}
 //
-
-import SwiftUI
-
-struct TestView: View {
-    
-    @State private var viewModel = QuestionsViewModel()
-    
-    var body: some View {
-        NavigationStack {
-            List(viewModel.questionsWithAnswers) { question in
-                
-                VStack {
-                    Text(question.question)
-//                    
-                }
-                
-            }
-            .navigationTitle("Questions")
-        }
-        
-    }
-    
-}
-
-#Preview {
-    TestView()
-}
+//#Preview {
+//    TestView()
+//}
