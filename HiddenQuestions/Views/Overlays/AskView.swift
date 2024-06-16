@@ -13,6 +13,8 @@ struct AskView: View {
     
     @State var content: String = ""
     
+    
+    
     @Environment(QuestionsViewModel.self) var viewModel
     
     var body: some View {
@@ -28,6 +30,8 @@ struct AskView: View {
                             .padding(32)
                             .font(.title)
                             .bold()
+                        
+                        
                         ZStack() {
                             TextField("", text: $content,axis: .vertical)
                                 .lineLimit(5...20)
@@ -75,12 +79,13 @@ struct AskView: View {
             }
             .padding(
                 EdgeInsets(
-                    top: 16,
-                    leading: 16,
-                    bottom: 0,
-                    trailing: 16
+                    top: 32,
+                    leading: 32,
+                    bottom: 16,
+                    trailing: 32
                 )
             )
+            .ignoresSafeArea()
         }
     }
 }

@@ -21,45 +21,60 @@ struct MainPageView: View {
     @State private var viewModel = QuestionsViewModel()
     
     var body: some View {
-        
-//        if (viewModel.questionsWithAnswers.isEmpty) {
-//            
-//            if (viewModel.fetchingQuestions) {
-//                ProgressView()
-//            } else {
-//                ZStack {
-//                    Color.darkGray
-//                        .ignoresSafeArea()
-//                    VStack {
-//                        Spacer()
-//                        Text("MasQue")
-//                            .font(.title)
-//                            .bold()
-//                            .padding(0)
-//                        Text("Stay out of the spotlight")
-//                            .bold()
-//                            .padding(1)
-//                        
-//                        VStack {
-//                            Text("There are no questions right now")
-//                            Text("Be the first to ask")
-//                        }
-//                        .bold()
-//                        .padding(64)
-//                       
-//                        Button(action: {
-//                            showingAskSheet = true
-//                        }, label: {
-//                            Image(systemName: "plus")
-//                                .font(.custom("a", size: 70))
-//                                .tint(.black)
-//                        })
-//                        Spacer()
-//                        Spacer()
-//                    }
-//                }
-//            }
-//        } else {
+            
+        if (viewModel.questionsWithAnswers.isEmpty) {
+            
+            if (viewModel.fetchingQuestions) {
+                ZStack {
+                    Color.darkGray
+                        .ignoresSafeArea()
+                    ProgressView()
+                }
+            } else {
+                ZStack {
+                    Color.darkGray
+                        .ignoresSafeArea()
+                    VStack {
+                        Spacer()
+                        Text("MasQue")
+                            .font(.title)
+                            .bold()
+                            .padding(0)
+                        Text("Speak without the spotlight")
+                            .bold()
+                            .padding(1)
+                        
+                        VStack {
+                            Text("There are no questions right now")
+                            Text("Be the first to ask")
+                        }
+                        .bold()
+                        .padding(64)
+                       
+                        Button(action: {
+                            showingAskSheet = true
+                        }, label: {
+                            Image(systemName: "plus")
+                                .font(.custom("a", size: 70))
+                                .tint(.black)
+                        })
+                        Spacer()
+                        Spacer()
+                    }
+                }
+                .sheet(isPresented: $showingAskSheet, onDismiss: {
+                    Task {
+                        try await viewModel.getQuestionWithAnswers()
+                    }
+                }) { AskView(showingAskSheet: $showingAskSheet)
+                        .environment(viewModel)
+                        .ignoresSafeArea()
+                        .presentationDetents([.fraction(1)])
+                    
+                    
+                }
+            }
+        } else {
             
             ScrollViewReader { proxy in
                 ZStack {
@@ -158,10 +173,11 @@ struct MainPageView: View {
                     
                     
                     
-//                }
+                }
             }
         }
     }
+    
 }
 
 #Preview {

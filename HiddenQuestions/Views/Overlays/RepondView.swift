@@ -11,16 +11,11 @@ struct RespondView: View {
     
     @Binding var showingAnswerSheet: Bool
     
-    
-    
     @State var content: String = ""
     
     @State var question: QuestionsAnswers
     
-    
     @Environment(QuestionsViewModel.self) var viewModel
-    
-    
     
     var body: some View {
         ZStack {
